@@ -11,6 +11,18 @@ class Customer
     DB[:connection].execute(sql)
   end
 
+  # from video!
+  #
+  # def self.find(id)
+  #   row = DB[:connection].execute("select * from customers where id = ?", id)
+  #   Customer.reify_from_row(row.flatten)
+  # end
+  #
+  # def carts
+  #   rows = DB[:connection].execute("select * from carts where carts.customer_id = ?", self.id)
+  #   Cart.reify_from_rows(rows)
+  # end
+
   def self.find_by_product_id(product_id)
     sql = <<-SQL
       SELECT * FROM customers

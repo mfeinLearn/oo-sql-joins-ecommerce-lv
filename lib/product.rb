@@ -1,4 +1,10 @@
+  # Product
+  # id
+  # name
+  # price
+
 class Product
+
   attr_accessor :id, :name, :price
 
   def self.create_table
@@ -11,6 +17,24 @@ class Product
     SQL
     DB[:connection].execute(sql)
   end
+
+  # from Video!
+  #
+  # def customers
+  #   sql = <<-SQL
+  #     SELECT DISTINCT(customers.id), customers.name FROM customers
+  #     INNER JOIN carts on customers.id = carts.customer_id
+  #     INNER JOIN line_items on carts.id = line_items.cart_id
+  #     WHERE line_items.products_id = ?;
+  #   SQL
+  #   rows = DB[:connection].execute(sql, self.id)
+  #   Customer.reify_from_row(rows)
+  # end
+  #
+  # def self.find(id)
+  #   row = DB[:connection].execute("select * from products where id = ?", id)
+  #   Product.reify_from_row(row.flatten)
+  # end
 
   def self.find_by_customer_id(customer_id)
     sql = <<-SQL

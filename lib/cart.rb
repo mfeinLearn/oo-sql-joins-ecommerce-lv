@@ -5,6 +5,27 @@
 class Cart
   attr_accessor :id, :customer_id
 
+  # from video!
+  #
+  # 2nd
+  # def customer
+  #   the_id_i_need_to_query = self.customer_id
+  #   # I need to query it from the customers table itself
+  #   row = DB[:connection].execute("select * from customers where id = ?", self.customer_id)
+  # end
+
+  # from video!
+  #
+  # 1st
+  # expected: Cart.find(3)
+  # return: <Cart object>
+  def self.find(id)
+    row = DB[:connection].execute("select * from carts where id = ?", id)
+    Cart.reify_from_row(row.flatten)
+  end
+  # below is evil(thats why we used bound params (?)):
+  # Cart.find("; DROP TABLE customers;")
+
   def self.create_table
     sql = <<-SQL
       CREATE TABLE IF NOT EXISTS carts (
